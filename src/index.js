@@ -500,6 +500,8 @@ class Offline {
 
             try {
               process.env = _.extend({}, this.service.provider.environment, this.service.functions[key].environment, this.originalEnvironment);
+              process.env.AWS_LAMBDA_FUNCTION_NAME = this.service.service + '-' + this.service.provider.stage
+              process.env.AWS_REGION = this.service.provider.region
               handler = functionHelper.createHandler(funOptions, this.options);
             }
             catch (err) {
